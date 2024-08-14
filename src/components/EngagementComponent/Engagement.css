@@ -1,0 +1,126 @@
+:root {
+    /* Light Mode Colors */
+    --light-engagement-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    --light-engagement-hover-bg: hwb(230 88% 10%);
+
+
+    /* Dark Mode Colors */
+    --dark-engagement-shadow: rgba(98, 102, 105, 0.3) 0px 1px 2px 0px, rgba(99, 103, 107, 0.15) 0px 2px 6px 2px;
+    --dark-engagement-hover-bg: hsla(229, 27%, 31%, 0.829);
+
+
+    /* Common Properties */
+    --engagement-card-height: 116px;
+    --engagement-card-padding: 20px;
+    --grid-gap: 23px;
+    --grid-column-gap: 62px;
+    --title-margin-left: 93px;
+}
+
+/* Engagement Wrapper */
+#engagement-wrapper {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: var(--grid-column-gap);
+    row-gap: var(--grid-gap);
+    margin: 15px 0 0 0;
+    justify-content: center;
+}
+
+div#engagement-section {
+    position: relative;
+    top: -67px;
+}
+
+/* Engagement Card */
+#engagement-card {
+    width: var(--card-width);
+    height: var(--engagement-card-height);
+    padding: var(--engagement-card-padding);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    row-gap: 15px;
+}
+
+/* Light Mode Styles */
+.light-mode-engagement-card {
+    background: var(--light-card-bg);
+    box-shadow: var(--light-engagement-shadow);
+    cursor: url('/public/images/blackHand.png'), pointer;
+}
+
+.light-mode-engagement-card:hover {
+    background: var(--light-engagement-hover-bg);
+}
+
+#engagement-title {
+    margin-left: var(--title-margin-left);
+    color: var(--light-subtext-color);
+}
+
+#platformTitle,
+#valueChange {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#valueChange h2 {
+    font-size: 28px;
+}
+
+#change-engagement {
+    font-size: 12px;
+}
+
+/* Dark Mode Styles */
+.dark-mode-engagement #engagement-title {
+    color: var(--dark-text-color);
+    margin-left: var(--title-margin-left);
+}
+
+.dark-mode-engagement-card {
+    background: var(--dark-card-bg);
+    box-shadow: var(--dark-engagement-shadow);
+    cursor: url('/public/images/whiteHand.png'), pointer;
+}
+
+.dark-mode-engagement-card:hover {
+    background: var(--dark-engagement-hover-bg);
+}
+
+.dark-mode-engagement-card #valueChange h2 {
+    color: var(--dark-text-color);
+}
+
+/* Mobile size */
+@media (max-width: 697px) {
+    #engagement-wrapper {
+        display: flex;
+        flex-direction: column;
+        row-gap: var(--grid-gap);
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 20px 0;
+    }
+
+    #engagement-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        color: var(--light-engagement-title-color);
+    }
+
+    .dark-mode-engagement #engagement-title {
+        margin: 0;
+        color: var(--dark-engagement-title-color);
+    }
+
+    .light-mode-engagement-card,
+    .dark-mode-engagement-card {
+        width: 300px;
+    }
+}
