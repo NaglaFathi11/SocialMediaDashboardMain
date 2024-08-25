@@ -1,7 +1,8 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import EngagementComponent from "./components/EngagementComponent/Engagement";
 
+export const ThemeMode = createContext(null);
 function App() {
   const [followers, setFollowers] = useState([
     {
@@ -44,85 +45,83 @@ function App() {
     },
   ]);
 
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedMode = localStorage.getItem("darkMode");
-    return savedMode ? JSON.parse(savedMode) : false;
-  });
-
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/followers') .then((response) => response.json()) .then((data) => setFollowers(data))}, [])
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  function setIsDarkModeFunction(value) {
+    setIsDarkMode(value);
+  }
 
   function toggleDarkMode() {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    localStorage.setItem("darkMode", JSON.stringify(newMode));
   }
 
   return (
-    <div
-      className={
-        isDarkMode ? "dark-mode-main-container" : "light-mode-main-container"
-      }
-    >
-      <header>
-        <div className="title-followers">
-          <h1>Social Media Dashboard</h1>
-          <p>Total Followers: 23,004</p>
-        </div>
-        <hr></hr>
-        <div id="darkMode">
-          <p>Dark Mode</p>
-          <div id="darkModeBTN">
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={isDarkMode}
-                onChange={toggleDarkMode}
-              />
-              <span className="slider"></span>
-            </label>
+    <ThemeMode.Provider value={{ isDarkMode, setIsDarkModeFunction }}>
+      <div
+        className={
+          isDarkMode ? "dark-mode-main-container" : "light-mode-main-container"
+        }
+      >
+        <header>
+          <div className="title-followers">
+            <h1>Social Media Dashboard</h1>
+            <p>Total Followers: 23,004</p>
           </div>
-        </div>
-      </header>
-
-      <div className="followers-wrapper">
-        {followers.map((item) => {
-          const isPositive = item.change.includes("+");
-          const chanValue = item.change.replace(/^\+|^-/, "").trim();
-          const style = {
-            borderTop: item.borderColor,
-            borderImage: item.borderColorGradient,
-          };
-
-          return (
-            <div
-              key={item.id}
-              className={`${item.className} ${
-                isDarkMode ? "dark-card" : "light-card"
-              }`}
-              style={style}
-            >
-              <div id="title1">
-                <img src={item.platform} alt="not-found" />
-                <p>{item.user}</p>
-              </div>
-              <div>
-                <h1>{item.value}</h1>
-                <p id="metric">{item.metric}</p>
-              </div>
-              <span
-                id="change"
-                style={{ color: isPositive ? "#1db489" : "#dc414c" }}
-              >
-                {isPositive ? "▲" : "▼"} {chanValue}
-              </span>
+          <hr></hr>
+          <div id="darkMode">
+            <p>Dark Mode</p>
+            <div id="darkModeBTN">
+              <label className="switch">
+                <input
+                  type="checkbox"
+                  checked={isDarkMode}
+                  onChange={toggleDarkMode}
+                />
+                <span className="slider"></span>
+              </label>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        </header>
 
-      <EngagementComponent isDarkMode={isDarkMode} />
-    </div>
+        <div className="followers-wrapper">
+          {followers.map((item) => {
+            const isPositive = item.change.includes("+");
+            const chanValue = item.change.replace(/^\+|^-/, "").trim();
+            const style = {
+              borderTop: item.borderColor,
+              borderImage: item.borderColorGradient,
+            };
+
+            return (
+              <div
+                key={item.id}
+                className={`${item.className} ${
+                  isDarkMode ? "dark-card" : "light-card"
+                }`}
+                style={style}
+              >
+                <div id="title1">
+                  <img src={item.platform} alt="not-found" />
+                  <p>{item.user}</p>
+                </div>
+                <div>
+                  <h1>{item.value}</h1>
+                  <p id="metric">{item.metric}</p>
+                </div>
+                <span
+                  id="change"
+                  style={{ color: isPositive ? "#1db489" : "#dc414c" }}
+                >
+                  {isPositive ? "▲" : "▼"} {chanValue}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        <EngagementComponent isDarkMode={isDarkMode} />
+      </div>
+    </ThemeMode.Provider>
   );
 }
 
