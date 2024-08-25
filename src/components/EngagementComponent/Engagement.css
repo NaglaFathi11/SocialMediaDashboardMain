@@ -56,8 +56,12 @@ div#engagement-section {
 }
 
 #engagement-title {
-    margin-left: var(--title-margin-left);
+
     color: var(--light-subtext-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
 }
 
 #platformTitle,
@@ -78,7 +82,10 @@ div#engagement-section {
 /* Dark Mode Styles */
 .dark-mode-engagement #engagement-title {
     color: var(--dark-text-color);
-    margin-left: var(--title-margin-left);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
 }
 
 .dark-mode-engagement-card {
@@ -112,11 +119,15 @@ div#engagement-section {
         align-items: center;
         margin: 0;
         color: var(--light-engagement-title-color);
+        width: 100%;
     }
+
+
 
     .dark-mode-engagement #engagement-title {
         margin: 0;
         color: var(--dark-engagement-title-color);
+        width: 100%;
     }
 
     .light-mode-engagement-card,

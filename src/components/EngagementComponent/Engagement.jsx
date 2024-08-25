@@ -1,7 +1,10 @@
 import "./Engagement.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { ThemeMode } from "../../App";
 
-function EngagementComponent(props) {
+function EngagementComponent() {
+  const passedValue = useContext(ThemeMode);
+
   const [engagement, setEngagement] = useState([
     {
       id: 1,
@@ -60,13 +63,16 @@ function EngagementComponent(props) {
       change: "-12%",
     },
   ]);
+
   // useEffect(() => {fetch('http://localhost:3000/engagement') .then(response => response.json()) .then(data => setEngagement(data)) }, [])
 
   return (
     <div
       id="engagement-section"
       className={
-        props.isDarkMode ? "dark-mode-engagement" : "light-mode-engagement"
+        passedValue.isDarkMode
+          ? "dark-mode-engagement"
+          : "light-mode-engagement"
       }
     >
       <h2 id="engagement-title">Overview - Today</h2>
@@ -80,7 +86,7 @@ function EngagementComponent(props) {
               <div
                 id="engagement-card"
                 className={
-                  props.isDarkMode
+                  passedValue.isDarkMode
                     ? "dark-mode-engagement-card"
                     : "light-mode-engagement-card"
                 }

@@ -33,6 +33,7 @@
 .light-mode-main-container,
 .dark-mode-main-container {
     width: 100%;
+    height: 100vh;
     transition: all ease-in var(--transition-duration);
 }
 
@@ -61,13 +62,24 @@ hr {
     background-color: var(--light-header-bg-color);
 }
 
+header h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 header p {
     color: var(--light-subtext-color);
     font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 69%;
 }
 
 .title-followers {
     margin-left: 25px;
+    width: 36%;
 }
 
 div#darkMode {
@@ -178,11 +190,20 @@ input:checked+.slider::before {
 }
 
 .dark-mode-main-container .title-followers h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     color: var(--dark-text-color);
 }
 
 .dark-mode-main-container .title-followers p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 69%;
     color: var(--dark-subtext-color);
+
 }
 
 .dark-mode-main-container .slider {
@@ -219,6 +240,13 @@ input:checked+.slider::before {
 /* Mobile Responsive Styles */
 @media (max-width: 697px) {
 
+    .light-mode-main-container,
+    .dark-mode-main-container {
+        width: 100%;
+        height: 100%;
+
+    }
+
     .light-mode-main-container header,
     .dark-mode-main-container header {
         display: flex;
@@ -230,13 +258,19 @@ input:checked+.slider::before {
     }
 
     .title-followers {
-        position: relative;
-        left: -66px;
         font-size: 10px;
+        width: 92%;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
     }
 
-    header p {
+    header p,
+    .dark-mode-main-container .title-followers p {
         font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
     }
 
     hr {
@@ -247,6 +281,7 @@ input:checked+.slider::before {
 
     div#darkMode p {
         font-size: 15px;
+
     }
 
     div#darkMode {
